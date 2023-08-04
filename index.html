@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGM PARTNERS CALL</title>
+  </head>
+  <body>
+    <script>
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      //
+      script.addEventListener("load", function (event) {
+        // Initialize the factory function
+        const meeting = new VideoSDKMeeting();
+
+        // Set apikey, meetingId and participant name
+        const apiKey = "268946ce-adc7-4882-8215-81bd625d2f38"; // generated from app.videosdk.live
+        const meetingId = "milkyway";
+        const name = "Enter Name";
+
+        const config = {
+          name: name,
+          apiKey: apiKey,
+          meetingId: meetingId,
+
+          containerId: null,
+          redirectOnLeave: "https://streamingtime100.onrender.com/",
+
+          micEnabled: true,
+          webcamEnabled: true,
+          participantCanToggleSelfWebcam: true,
+          participantCanToggleSelfMic: true,
+
+          chatEnabled: true,
+          screenShareEnabled: true,
+          pollEnabled: true,
+          whiteboardEnabled: true,
+          raiseHandEnabled: true,
+
+          recordingEnabled: true,
+          recordingEnabledByDefault: false,
+          recordingWebhookUrl: "https://www.videosdk.live/callback",
+          recordingAWSDirPath: `/meeting-recordings/${meetingId}/`, // automatically save recording in this s3 path
+
+          
+          participantCanLeave: true, // if false, leave button won't be visible
+
+          // Live stream meeting to youtube
+          livestream: {
+            autoStart: true,
+            outputs: [
+              // {
+              //   url: "rtmp://x.rtmp.youtube.com/live2",
+              //   streamKey: "<STREAM KEY FROM YOUTUBE>",
+              // },
+            ],
+          },
+
+          permissions: {
+            askToJoin: false, // Ask joined participants for entry in meeting
+            webcamEnabled: true,
+            participantCanToggleSelfWebcam: true,
+            toggleParticipantMic: true, // Can toggle other participant's mic
+            toggleParticipantWebcam: true, // Can toggle other participant's webcam
+            removeParticipant: true, // Remove other participant from meeting
+            endMeeting: true, // End meeting for all participant
+            drawOnWhiteboard: true, // Can Draw on whiteboard
+            toggleWhiteboard: true, // Can toggle whiteboard
+            toggleRecording: true, // Can toggle recording
+            togglelayout:  true,
+            toggleLivestream: true,
+            toggleParticipantMode: true,
+             toggleHls: true,
+             changeLayout: true,
+          },
+
+          layout: {
+          type: "SIDEBAR", // "SPOTLIGHT" | "SIDEBAR" | "GRID"
+           priority: "PIN", // "SPEAKER" | "PIN",
+          gridSize: 3,
+           },
+
+          hls: {
+          enabled: true,
+          autoStart: false,
+           theme: "DARK", // DARK || LIGHT || DEFAULT
+           mode: "", // VIEWER || CONFERENCE
+          },
+
+          
+          livestream: {
+           autoStart: false,
+           enabled: true,
+            theme: "DEFAULT", // DARK || LIGHT || DEFAULT
+           },
+
+          joinScreen: {
+            visible: true, // Show the join screen ?
+            title: "PARTNERS CALL", // Meeting title
+            meetingUrl: window.location.href, // Meeting joining url
+          },
+
+         layout: {
+          type: "SPOTLIGHT", // "SPOTLIGHT" | "SIDEBAR" | "GRID"
+           priority: "PIN", // "SPEAKER" | "PIN",
+          gridSize: 3,
+         },
+
+          pin: {
+            allowed: true, // participant can pin any participant in meeting
+            layout: "SPOTLIGHT", // meeting layout - GRID | SPOTLIGHT | SIDEBAR
+           },
+        branding: {
+            enabled: true,
+            logoURL:
+            "",
+           name: "Transfiguration Tv",
+           poweredBy: false,
+          },
+
+          leftScreen: {
+           actionButton: {
+            label: "Video SDK",
+            href: "https://www.videosdk.live",
+          },
+           rejoinButtonEnabled: true,
+             },
+        };
+
+        meeting.init(config);
+      });
+
+      script.src =
+        "https://sdk.videosdk.live/rtc-js-prebuilt/0.3.31/rtc-js-prebuilt.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    </script>
+  </body>
+</html>
